@@ -1,4 +1,4 @@
 CREATE TABLE book_stock (
-    bookid SERIAL PRIMARY KEY,
+    bookid BIGINT PRIMARY KEY,
     stock INTEGER NOT NULL
 );
