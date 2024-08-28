@@ -16,9 +16,12 @@ public class BookStockController {
     @Autowired
     private BookStockService bookStockService;
 
-    @GetMapping
-    public List<StockDTO> getAllStocks() {
-        return bookStockService.getAllStocks();
+    @GetMapping("/stocks")
+    public List<StockDTO> getAllStocks(
+            @RequestParam int page,
+            @RequestParam int size
+    ) {
+        return bookStockService.getAllStocks(page, size);
     }
 
     @GetMapping("/{bookId}")

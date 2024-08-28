@@ -5,6 +5,9 @@ import com.example.Inventory.mapper.StockMapper;
 import com.example.Inventory.model.BookStock;
 import com.example.Inventory.repo.BookStockRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,8 +20,11 @@ public class BookStockService {
     @Autowired
     private BookStockRepo bookStockRepo;
 
-    public List<StockDTO> getAllStocks() {
-        return bookStockRepo.findAll().stream()
+    public List<StockDTO> getAllStocks(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<BookStock> bookStockPage = bookStockRepo.findAll(pageable);
+
+        return bookStockPage.stream()
                 .map(StockMapper::toDTO)
                 .collect(Collectors.toList());
     }
