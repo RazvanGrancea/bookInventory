@@ -18,8 +18,8 @@ public class BookStockController {
 
     @GetMapping("/stocks")
     public List<StockDTO> getAllStocks(
-            @RequestParam int page,
-            @RequestParam int size
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
     ) {
         return bookStockService.getAllStocks(page, size);
     }
